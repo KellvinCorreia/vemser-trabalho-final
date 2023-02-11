@@ -13,6 +13,13 @@ public abstract class User {
         this.setBirthDate(1, 1, 1);
     }
 
+    public User(String CPF, String name, String email, int userType) {
+        this.CPF = CPF;
+        this.name = name;
+        this.email = email;
+        this.userType = userType;
+    }
+
     public User(String CPF, String name, String email, Calendar birthDate, int userType) {
         this.CPF = CPF;
         this.name = name;

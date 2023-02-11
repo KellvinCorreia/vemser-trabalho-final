@@ -16,6 +16,12 @@ public class Employee extends User {
         this.monthlySales = 0;
     }
 
+    public Employee(String CPF, String name, String email, int userType) {
+        super(CPF, name, email, userType);
+        this.idRegistration = UUID.randomUUID();
+        this.monthlySales = 0;
+    }
+
     public Employee(String CPF, String name, String email, Calendar birthDate, int userType) {
         super(CPF, name, email, birthDate, userType);
         this.idRegistration = UUID.randomUUID();
@@ -49,7 +55,7 @@ public class Employee extends User {
     public void showInfos() {
 
         int day = this.getBirthDate().get(Calendar.DAY_OF_MONTH);
-        int month = this.getBirthDate().get(Calendar.MONTH);
+        int month = this.getBirthDate().get(Calendar.MONTH) + 1;
         int year = this.getBirthDate().get(Calendar.YEAR);
 
         System.out.printf("""

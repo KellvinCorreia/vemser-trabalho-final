@@ -2,18 +2,23 @@ package src.classes;
 
 import src.classes.abstracts.User;
 
-import src.interfaces.Print;
+//import src.interfaces.Print;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class Client extends User implements Print{
+public class Client extends User /*implements Print*/{
     private List<Address> address;
     private String phone;
 
     public Client() {
         super();
+    }
+
+    public Client(String CPF, String name, String email, int userType) {
+        super(CPF, name, email, userType);
+        this.address = new ArrayList<>();
     }
 
     public Client(String CPF, String name, String email, Calendar birthDate, int userType) {
@@ -40,7 +45,7 @@ public class Client extends User implements Print{
     public void showInfos() {
 
         int day = this.getBirthDate().get(Calendar.DAY_OF_MONTH);
-        int month = this.getBirthDate().get(Calendar.MONTH);
+        int month = this.getBirthDate().get(Calendar.MONTH) + 1;
         int year = this.getBirthDate().get(Calendar.YEAR);
 
         System.out.printf("""
