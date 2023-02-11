@@ -2,10 +2,12 @@ package src.classes;
 
 import src.classes.abstracts.User;
 
+import src.interfaces.Print;
+
 import java.util.Calendar;
 import java.util.UUID;
 
-public class Employee extends User {
+public class Employee extends User implements Print{
     private final UUID idRegistration;
     private double salary;
     private int monthlySales;
@@ -54,19 +56,15 @@ public class Employee extends User {
 
     public void showInfos() {
 
-        int day = this.getBirthDate().get(Calendar.DAY_OF_MONTH);
-        int month = this.getBirthDate().get(Calendar.MONTH) + 1;
-        int year = this.getBirthDate().get(Calendar.YEAR);
-
         System.out.printf("""
                 Matrícula: %s
                 Nome: %s
                 CPF: %s
                 Email: %s
-                Data de nascimento: %d/%d/%d
+                Data de nascimento: %s
                 Salário: R$ %.2f
                 Vendas mensais: %d
                 Tipo de usuário: %d
-                """, this.getIdRegistration(), this.getName(), this.getCPF(), this.getEmail(), day, month, year, this.getSalary(), this.getMonthlySales(), this.getUserType());
+                """, this.getIdRegistration(), this.getName(), this.getCPF(), this.getEmail(), this.getFormatedBirthDate(), this.getSalary(), this.getMonthlySales(), this.getUserType());
     }
 }
