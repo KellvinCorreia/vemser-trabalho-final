@@ -9,9 +9,7 @@ public abstract class User {
     private Calendar birthDate;
     private int userType;
 
-    public User(){
-        this.setBirthDate(1, 1, 1);
-    }
+    public User(){}
 
     public User(String CPF, String name, String email, int userType) {
         this.CPF = CPF;
@@ -57,11 +55,10 @@ public abstract class User {
     }
 
     public void setBirthDate(int day, int month, int year) {
-        Calendar date = Calendar.getInstance();
-        date.set(Calendar.DAY_OF_MONTH, day);
-        date.set(Calendar.MONTH, month);
-        date.set(Calendar.YEAR, year);
-        this.birthDate = date;
+        this.birthDate = Calendar.getInstance();
+        this.birthDate.set(Calendar.DAY_OF_MONTH, day);
+        this.birthDate.set(Calendar.MONTH, month-1);
+        this.birthDate.set(Calendar.YEAR, year);
     }
 
     public int getUserType() {
