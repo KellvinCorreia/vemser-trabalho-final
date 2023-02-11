@@ -1,15 +1,19 @@
 package src.classes.abstracts;
 
+import java.util.Calendar;
+
 public abstract class User {
     private String CPF;
     private String name;
     private String email;
-    private String birthDate;
+    private Calendar birthDate;
     private int userType;
 
-    public User(){}
+    public User(){
+        this.setBirthDate(1, 1, 1);
+    }
 
-    public User(String CPF, String name, String email, String birthDate, int userType) {
+    public User(String CPF, String name, String email, Calendar birthDate, int userType) {
         this.CPF = CPF;
         this.name = name;
         this.email = email;
@@ -41,12 +45,16 @@ public abstract class User {
         this.email = email;
     }
 
-    public String getBirthDate() {
+    public Calendar getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
+    public void setBirthDate(int day, int month, int year) {
+        Calendar date = Calendar.getInstance();
+        date.set(Calendar.DAY_OF_MONTH, day);
+        date.set(Calendar.MONTH, month);
+        date.set(Calendar.YEAR, year);
+        this.birthDate = date;
     }
 
     public int getUserType() {

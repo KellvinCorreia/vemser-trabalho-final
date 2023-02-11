@@ -2,6 +2,7 @@ package src.classes;
 
 import src.classes.abstracts.User;
 
+import java.util.Calendar;
 import java.util.UUID;
 
 public class Employee extends User {
@@ -15,7 +16,7 @@ public class Employee extends User {
         this.monthlySales = 0;
     }
 
-    public Employee(String CPF, String name, String email, String birthDate, int userType) {
+    public Employee(String CPF, String name, String email, Calendar birthDate, int userType) {
         super(CPF, name, email, birthDate, userType);
         this.idRegistration = UUID.randomUUID();
         this.monthlySales = 0;
@@ -46,14 +47,20 @@ public class Employee extends User {
     }
 
     public void showInfos() {
+
+        int day = this.getBirthDate().get(Calendar.DAY_OF_MONTH);
+        int month = this.getBirthDate().get(Calendar.MONTH);
+        int year = this.getBirthDate().get(Calendar.YEAR);
+
         System.out.printf("""
                 Matrícula: %s
                 Nome: %s
                 CPF: %s
                 Email: %s
-                Data de nascimento: %s
+                Data de nascimento: %d/%d/%d
                 Salário: R$ %.2f
                 Vendas mensais: %d
-                Tipo de usuário: %d""", this.getIdRegistration(), this.getName(), this.getCPF(), this.getEmail(), this.getBirthDate(), this.getSalary(), this.getMonthlySales(), this.getUserType());
+                Tipo de usuário: %d
+                """, this.getIdRegistration(), this.getName(), this.getCPF(), this.getEmail(), day, month, year, this.getSalary(), this.getMonthlySales(), this.getUserType());
     }
 }
