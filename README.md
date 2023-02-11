@@ -17,7 +17,7 @@
   - [ ] Diagrama de classes
   - [x] Criar 4 classes (que tenham atributos e método úteis e que não seja a main)
   - [x] Criar um primeiro diagrama de classes com as classes definidas
-  - [ ] Criar 2 interfaces relevantes para o seu projeto
+  - [ ] Criar 2 src.interfaces relevantes para o seu projeto
 - [x] Criar ao menos 2 Collections
 - [ ] Para cada classe útil, deve ser possível fazer as operações CRUD:
   - [ ] CREATE(criação de um objeto)
