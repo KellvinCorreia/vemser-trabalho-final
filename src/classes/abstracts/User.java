@@ -54,6 +54,19 @@ public abstract class User {
         return birthDate;
     }
 
+    public String getFormatedBirthDate() {
+
+        if(this.getBirthDate() == null) {
+            return "N/A";
+        }
+
+        int day = this.getBirthDate().get(Calendar.DAY_OF_MONTH);
+        int month = this.getBirthDate().get(Calendar.MONTH) + 1;
+        int year = this.getBirthDate().get(Calendar.YEAR);
+
+        return day + "/" + month + "/" + year;
+    }
+
     public void setBirthDate(int day, int month, int year) {
         this.birthDate = Calendar.getInstance();
         this.birthDate.set(Calendar.DAY_OF_MONTH, day);
