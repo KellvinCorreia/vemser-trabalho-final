@@ -12,17 +12,21 @@ public class Client extends User implements Print{
     private List<Address> address;
     private String phone;
 
+    private double money;
+
     public Client() {
         super();
     }
 
-    public Client(String CPF, String name, String email, int userType) {
+    public Client(String CPF, String name, String email, double money, int userType) {
         super(CPF, name, email, userType);
+        this.money = money;
         this.address = new ArrayList<>();
     }
 
-    public Client(String CPF, String name, String email, Calendar birthDate, int userType) {
+    public Client(String CPF, String name, String email, double money, Calendar birthDate, int userType) {
         super(CPF, name, email, birthDate, userType);
+        this.money = money;
         this.address = new ArrayList<>();
     }
 
@@ -40,6 +44,14 @@ public class Client extends User implements Print{
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public double getMoney() {
+        return money;
+    }
+
+    public void setMoney(double money) {
+        this.money = money;
     }
 
     public void showInfos() {
