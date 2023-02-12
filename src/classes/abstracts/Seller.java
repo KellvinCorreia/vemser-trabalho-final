@@ -2,17 +2,19 @@ package src.classes.abstracts;
 
 import src.classes.Address;
 import src.classes.Product;
+import src.interfaces.Dashboard;
+import src.interfaces.Print;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Seller {
-    private String cnpj;
-    private String name;
-    private String email;
+public abstract class Seller implements Print, Dashboard {
+    protected String cnpj;
+    protected String name;
+    protected String email;
     protected int maxStockPerItem;
     protected int maxStock;
-    private List<Address> address;
+    protected List<Address> address;
     protected List<Product> products = new ArrayList<>();
 
 
@@ -23,16 +25,6 @@ public abstract class Seller {
         this.maxStockPerItem = maxStockPerItem;
         this.maxStock = maxStock;
     }
-
-//    public String returnProducts(String str){
-//        if (products.size() > 0){
-//            System.out.println(str);
-//            for (int i = 0; i < products.size(); i++) {
-//                System.out.println(products.get(i).getName());
-//            }
-//        }
-//        return null;
-//    }
 
     public void returnDistinctList(String str){
         System.out.println(str);
@@ -54,7 +46,7 @@ public abstract class Seller {
 
     public boolean editProducts(String str, Product product){
         for (Product p:products) {
-            if (p.getName().contains(str)){
+            if (p.getName().equals(str)){
                 if (!product.getName().equals("") && !product.getName().equals(null) && !product.getName().equals(p.getName())){
                     p.setName(product.getName());
                 }
@@ -70,6 +62,36 @@ public abstract class Seller {
         System.out.println("item não encontrado");
         return false;
     }
+
+    @Override
+    public void showStock() {
+        int percentage = (products.size() / 100) * maxStock;
+        System.out.println("o estoque está " + percentage + "% cheio");
+    }
+
+    @Override
+    public void lackProducts() {
+        int percentage = (products.size() / 100) * maxStock;
+        int lack = 100 - percentage;
+        System.out.println("o estoque está " + lack + "% vazio");
+        if(lack > 70){
+            System.out.println("está na hora de estocar produtos");
+        }
+    }
+
+    @Override
+    public void showInfos() {
+        List<Product> distinct = products.stream().distinct().toList();
+        for (Product p:distinct) {
+            System.out.printf("nome: %s, descição: %s, preço: %.2f e quantidade em estoque: %d",
+                    p.getName(),
+                    p.getDescription(),
+                    p.getPrice(),
+                    returnNumProductsInStock(p.getName()));
+            System.out.println();
+        }
+    }
+
     public void addStock(Product product){
         products.add(product);
     }

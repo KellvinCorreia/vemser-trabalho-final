@@ -2,10 +2,7 @@ package src.classes;
 
 import src.classes.abstracts.Seller;
 
-import java.util.Scanner;
-
 public class Supplier extends Seller {
-    Scanner scanner = new Scanner(System.in);
 
     public Supplier(String cnpj, String name, String email, int maxStockPerItem, int maxStock) {
         super(cnpj, name, email, maxStockPerItem, maxStock);

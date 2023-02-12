@@ -73,4 +73,38 @@ public class Order {
                 .mapToDouble(element -> element.getPrice())
                 .sum();
     }
+
+    public boolean getProductInStore(Store store, String productName, int qtd){
+        Product product = store.getProducts().stream().filter(product1 -> product1.getName().equals(productName)).findFirst().get();
+        if (product != null){
+            if (qtd < store.returnNumProductsInStock(productName)){
+                for (int i = 0; i <qtd; i++) {
+                    products.add(product);
+                }
+            }
+            System.out.println("produtos postos no carrinho");
+            return true;
+        }
+        System.out.println("produtos em estoque menor que o pedido");
+        return false;
+    }
+
+
+    public boolean checkout(Store store){
+        if (client.getMoney() >= totalPrice()){
+            client.setMoney(client.getMoney() - totalPrice());
+            removeStockStore(store);
+            System.out.println("compra finalizada");
+            return true;
+        }
+        System.out.println("saldo insuficiente");
+        return false;
+    }
+
+    public void removeStockStore(Store store){
+        for (Product p:products) {
+            store.removeStock(p);
+        }
+    }
+
 }
