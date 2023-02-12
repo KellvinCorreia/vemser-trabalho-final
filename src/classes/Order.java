@@ -94,11 +94,19 @@ public class Order {
         if (client.getMoney() >= totalPrice()){
             client.setMoney(client.getMoney() - totalPrice());
             removeStockStore(store);
+            products.clear();
+            status = true;
             System.out.println("compra finalizada");
             return true;
         }
         System.out.println("saldo insuficiente");
         return false;
+    }
+
+    public void showItems(){
+        for (int i = 0; i < products.size(); i++) {
+            System.out.printf("id[%d], nome: %s", (i + 1), products.get(i).getName());
+        }
     }
 
     public void removeStockStore(Store store){

@@ -26,14 +26,6 @@ public abstract class Seller implements Print, Dashboard {
         this.maxStock = maxStock;
     }
 
-    public void returnDistinctList(String str){
-        System.out.println(str);
-        List<Product> listDistinct = products.stream().distinct().toList();
-        for (Product product:listDistinct) {
-            System.out.println(product.getName());
-        }
-    }
-
     public int returnNumProductsInStock(String value){
         int inStock = 0;
         for (Product product:products) {
@@ -53,7 +45,7 @@ public abstract class Seller implements Print, Dashboard {
                 if (!product.getDescription().equals("") && !product.getDescription().equals(null) && !product.getDescription().equals(p.getDescription())){
                     p.setDescription(product.getDescription());
                 }
-                if (product.getPrice() <= 0 && !product.getDescription().equals(p.getPrice())){
+                if (product.getPrice() >= 0 && product.getPrice() != p.getPrice()){
                     p.setPrice(product.getPrice());
                 }
                 return true;
@@ -65,22 +57,6 @@ public abstract class Seller implements Print, Dashboard {
 
     @Override
     public void showStock() {
-        int percentage = (products.size() / 100) * maxStock;
-        System.out.println("o estoque está " + percentage + "% cheio");
-    }
-
-    @Override
-    public void lackProducts() {
-        int percentage = (products.size() / 100) * maxStock;
-        int lack = 100 - percentage;
-        System.out.println("o estoque está " + lack + "% vazio");
-        if(lack > 70){
-            System.out.println("está na hora de estocar produtos");
-        }
-    }
-
-    @Override
-    public void showInfos() {
         List<Product> distinct = products.stream().distinct().toList();
         for (Product p:distinct) {
             System.out.printf("nome: %s, descição: %s, preço: %.2f e quantidade em estoque: %d",
@@ -92,6 +68,22 @@ public abstract class Seller implements Print, Dashboard {
         }
     }
 
+    @Override
+    public void lackProducts() {
+        double percentage = (products.size() * 100) / maxStock;
+        System.out.println("quantidade de produtos: " + products.size());
+        System.out.println("o estoque está " + percentage + "% cheio");
+        if (percentage < 20){
+            System.out.println("precisa estocar mais produtos");
+        }
+    }
+
+    @Override
+    public void showInfos() {
+        System.out.printf("CNPJ: %s, nome: %s, email: %s", cnpj, name, email);
+        System.out.println();
+    }
+
     public void addStock(Product product){
         products.add(product);
     }
@@ -100,19 +92,19 @@ public abstract class Seller implements Print, Dashboard {
     }
 
     public void changeCnpj(String str){
-        if (!str.equals(getCnpj())){
+        if (!str.equals(getCnpj()) && str != ""){
             setCnpj(str);
         }
     }
 
     public void changeName(String str){
-        if (!str.equals(getName())){
+        if (!str.equals(getName()) && str != ""){
             setName(str);
         }
     }
 
     public void changeEmail(String str){
-        if (!str.equals(getEmail())){
+        if (!str.equals(getEmail()) && str != ""){
             setEmail(str);
         }
     }
