@@ -8,13 +8,6 @@ public class Order {
     private Client client;
     private List<Product> products = new ArrayList<>();
 
-    public Order() {
-
-    }
-    public Order(Client client, int paymentType) {
-        this.client = client;
-        this.paymentType = paymentType;
-    }
 
     private int paymentType;
     private boolean status;
@@ -39,20 +32,39 @@ public class Order {
         this.client = client;
     }
 
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(Product product) {
-        this.products.add(product);
-    }
-
     public boolean isStatus() {
         return status;
     }
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+
+    public void setProducts(Product product) {
+        this.products.add(product);
+    }
+    public List<Product> getProducts() {
+        return products;
+    }
+    public void updateProduct(Product oldProduct, Product newProduct) {
+        int index = products.indexOf(oldProduct);
+        products.set(index, newProduct);
+    }
+    public void deleteProduct(Product product) {
+        if (this.products.contains(product)) {
+            this.products.remove(product);
+        } else {
+            System.out.println("O produto não foi encontrado no estoque.");
+        }
+    }
+
+    public Order() {
+
+    }
+    public Order(Client client, int paymentType) {
+        this.client = client;
+        this.paymentType = paymentType;
     }
 
     public double totalPrice() {
