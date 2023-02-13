@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class Client extends User implements Print{
+public class Client extends User{
     private List<Address> address;
     private String phone;
 

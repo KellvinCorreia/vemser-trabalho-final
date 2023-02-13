@@ -7,7 +7,7 @@ import src.interfaces.Print;
 import java.util.Calendar;
 import java.util.UUID;
 
-public class Employee extends User implements Print{
+public class Employee extends User{
     private final UUID idRegistration;
     private double salary;
     private int monthlySales;
