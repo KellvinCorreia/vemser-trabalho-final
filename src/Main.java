@@ -3,7 +3,6 @@ package src;
 import src.classes.*;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Scanner;
 
@@ -292,6 +291,7 @@ public class Main {
 
         Employee employee = new Employee(cpf, name, email, 1);
         employee.setSalary(salary);
+        employee.setBirthDate(day, month, year);
         employees.add(employee);
     }
 
@@ -497,8 +497,7 @@ public class Main {
         System.out.println("escolha um fornecedor");
         int index = scanner.nextInt();
         scanner.nextLine();
-        Supplier supplier = suppliers.get(index - 1);
-        return supplier;
+        return suppliers.get(index - 1);
     }
 
     public static Client getClientInList(Scanner scanner, List<Client> clients){
@@ -506,8 +505,7 @@ public class Main {
         System.out.println("escolha um cliente");
         int index = scanner.nextInt();
         scanner.nextLine();
-        Client client = clients.get(index - 1);
-        return client;
+        return clients.get(index - 1);
     }
 
     public static Employee getEmployeeInList(Scanner scanner, List<Employee> employees){
@@ -515,8 +513,7 @@ public class Main {
         System.out.println("escolha um cliente");
         int index = scanner.nextInt();
         scanner.nextLine();
-        Employee employee = employees.get(index - 1);
-        return employee;
+        return employees.get(index - 1);
     }
 
     public static void initializingClassesForTest(List<Client> clientsList, List<Employee> employees, List<Supplier> suppliersList){
@@ -543,8 +540,7 @@ public class Main {
         System.out.println("3. opções do fornecedor");
         System.out.println("4. sair");
 
-        String userInput = scanner.nextLine();
-        return userInput;
+        return scanner.nextLine();
     }
 
     public static String getClientOrEmployeeInput(Scanner scanner){
@@ -554,8 +550,7 @@ public class Main {
         System.out.println("1. Cliente");
         System.out.println("2. Funcionário");
 
-        String userInput = scanner.nextLine();
-        return userInput;
+        return scanner.nextLine();
     }
     public static String userOptions(Scanner scanner){
         System.out.println();
@@ -568,8 +563,7 @@ public class Main {
         System.out.println("5. cadastrar endereço");
         System.out.println("6. depositar");
 
-        String userInput = scanner.nextLine();
-        return userInput;
+        return scanner.nextLine();
     }
 
     public static String orderOptions(Scanner scanner){
@@ -582,8 +576,7 @@ public class Main {
         System.out.println("4. pagar");
         System.out.println("5. sair");
 
-        String userInput = scanner.nextLine();
-        return userInput;
+        return scanner.nextLine();
     }
 
     public static String storeOptions(Scanner scanner){
@@ -596,8 +589,7 @@ public class Main {
         System.out.println("4. editar informações da loja");
         System.out.println("5. editar informações dos produtos");
 
-        String userInput = scanner.nextLine();
-        return userInput;
+        return scanner.nextLine();
     }
 
     public static String supllierOptions(Scanner scanner){
@@ -611,8 +603,7 @@ public class Main {
         System.out.println("5. editar informações dos produtos");
         System.out.println("6. adicionar novo fornecedor");
 
-        String userInput = scanner.nextLine();
-        return userInput;
+        return scanner.nextLine();
     }
 
     public static void showListSuppliers(List<Supplier> suppliers){
