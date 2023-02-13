@@ -1,8 +1,10 @@
 package src.classes.abstracts;
 
+import src.interfaces.Print;
+
 import java.util.Calendar;
 
-public abstract class User {
+public abstract class User implements Print {
     private String CPF;
     private String name;
     private String email;
