@@ -57,6 +57,10 @@ public abstract class Seller implements Print, Dashboard {
     @Override
     public void showStock() {
         List<Product> distinct = products.stream().distinct().toList();
+        if(products.isEmpty()) {
+            System.out.println("estoque vazio");
+            return;
+        }
         for (Product p:distinct) {
             System.out.printf("nome: %s, descição: %s, preço: %.2f e quantidade em estoque: %d",
                     p.getName(),
