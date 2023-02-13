@@ -249,12 +249,16 @@ public class Main {
         String newPhone = scanner.nextLine();
 
         System.out.println("digite a nova data de nascimento: ");
+        System.out.print("Dia: ");
+
         int newDay = scanner.nextInt();
         scanner.nextLine();
 
+        System.out.print("Mês: ");
         int newMonth = scanner.nextInt();
         scanner.nextLine();
 
+        System.out.print("Ano: ");
         int newYear = scanner.nextInt();
         scanner.nextLine();
 
