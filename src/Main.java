@@ -3,7 +3,6 @@ package src;
 import src.classes.*;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Scanner;
 
@@ -292,6 +291,7 @@ public class Main {
 
         Employee employee = new Employee(cpf, name, email, 1);
         employee.setSalary(salary);
+        employee.setBirthDate(day, month, year);
         employees.add(employee);
     }
 
