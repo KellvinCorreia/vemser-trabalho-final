@@ -11,6 +11,11 @@ A stock, sales and orders management system.
 
 * [JDK 19](https://www.oracle.com/java/technologies/downloads/#java19) - JDK used to create the project
 
+## 🧬 Flowchart
+
+![Fluxogramas](https://user-images.githubusercontent.com/91345900/218456466-4aaa81e1-8f5b-4b72-8cef-0b1c0e1774d0.png)
+* [Lucid chart](https://lucid.app/lucidchart/5c721548-5874-44b6-9e9f-71401d5ee698/edit?invitationId=inv_15168bc0-f648-4bdc-aff7-28d2363365a9&page=0_0#)
+
 ## ✨ Features
 
 - [x] User registration
