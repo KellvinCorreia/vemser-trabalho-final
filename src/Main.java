@@ -53,7 +53,7 @@ public class Main {
                         case "3" ->{
                             Client client = getClientInList(scanner, clients);
                             Order order = new Order(client);
-                            while (!order.isStatus()){
+                            while (!order.isStatus() && !userInput.equals("5")){
                                 userInput = orderOptions(scanner);
                                 //=======[Switch do ORDER]=========
                                 switch (userInput){
