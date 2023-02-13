@@ -69,7 +69,7 @@ public abstract class Seller implements Print, Dashboard {
 
     @Override
     public void lackProducts() {
-        double percentage = (products.size() * 100) / maxStock;
+        double percentage = (products.size() * 100.0) / maxStock;
         System.out.println("quantidade de produtos: " + products.size());
         System.out.println("o estoque está " + percentage + "% cheio");
         if (percentage < 20){
