@@ -43,10 +43,10 @@ public class Main {
 
                         }
                         case "2" ->{
-                            System.out.println("CLIENTES:");
+                            System.out.println("\n----- CLIENTES -----");
                             showListClients(clients);
 
-                            System.out.println("FUNCIONÁRIOS");
+                            System.out.println("\n----- FUNCIONÁRIOS -----");
                             showListEmployees(employees);
                         }
                         case "3" ->{
@@ -109,6 +109,7 @@ public class Main {
                             replacingStock(scanner, suppliers, store);
                         }
                         case "2" ->{
+                            System.out.println("\n----- ESTOQUE -----");
                             store.showStock();
                         }
                         case "3" ->{
@@ -164,7 +165,6 @@ public class Main {
             }
             userInput = getUserInput(scanner);
         }
-
     }
 
     private static void depositClient(Scanner scanner, List<Client> clients) {
@@ -275,13 +275,14 @@ public class Main {
         System.out.print("Informe o email: ");
         String email = scanner.nextLine();
 
-        System.out.print("Informe a data de nascimento: ");
-        System.out.println("dia:");
+        System.out.println("Informe a data de nascimento: ");
+        System.out.print("dia: ");
         int day = scanner.nextInt();
         scanner.nextLine();
-        System.out.println("mês:");
+        System.out.print("mês: ");
         int month = scanner.nextInt();
         scanner.nextLine();
+        System.out.print("ano: ");
         int year = scanner.nextInt();
         scanner.nextLine();
 
@@ -305,16 +306,17 @@ public class Main {
         System.out.print("Informe o email: ");
         String email = scanner.nextLine();
 
-        System.out.println("Informe o telefone: ");
+        System.out.print("Informe o telefone: ");
         String phone = scanner.nextLine();
 
-        System.out.print("Informe a data de nascimento: ");
-        System.out.println("dia:");
+        System.out.println("Informe a data de nascimento: ");
+        System.out.print("dia: ");
         int day = scanner.nextInt();
         scanner.nextLine();
-        System.out.println("mês:");
+        System.out.print("mês: ");
         int month = scanner.nextInt();
         scanner.nextLine();
+        System.out.print("ano: ");
         int year = scanner.nextInt();
         scanner.nextLine();
 
@@ -613,12 +615,12 @@ public class Main {
     }
     public static void showListClients(List<Client> clients){
         for (int i = 0; i < clients.size(); i++) {
-            System.out.println("id[" + (i + 1) + "], nome:" + clients.get(i).getName() + ", saldo: " + clients.get(i).getMoney());
+            System.out.println("id[" + (i + 1) + "], Nome:" + clients.get(i).getName() + ", CPF: " + clients.get(i).getCPF() + ", saldo: " + clients.get(i).getMoney());
         }
     }
     public static void showListEmployees(List<Employee> employees){
         for (int i = 0; i < employees.size(); i++) {
-            System.out.println("id[" + (i + 1) + "], nome:" + employees.get(i).getName());
+            System.out.println("id[" + (i + 1) + "], Nome:" + employees.get(i).getName() + ", Matricula: " + employees.get(i).getIdRegistration());
         }
     }
 }
