@@ -3,6 +3,7 @@ package src;
 import src.classes.*;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Scanner;
 
@@ -11,8 +12,9 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         List<Client> clients = new ArrayList<>();
+        List<Employee> employees = new ArrayList<>();
         List<Supplier> suppliers = new ArrayList<>();
-        initializingClassesForTest(clients, suppliers);
+        initializingClassesForTest(clients, employees, suppliers);
         Store store = new Store("12. 345. 678/0001-99","Mercado do seu Zé","seuZe@gmail.com",25,300);
 
         String userInput = getUserInput(scanner);
@@ -26,30 +28,49 @@ public class Main {
                     //==========[Switch do CLIENTE]=========
                     switch (userInput){
                         case "1" ->{
-                            System.out.println("opção usuário 1");
+                            System.out.println("o que deseja cadastrar?");
+                            userInput = getClientOrEmployeeInput(scanner);
+                            switch (userInput){
+                                case "1" ->{
+                                    registerClient(scanner, clients);
+                                }
+                                case "2" ->{
+                                    registerEmployee(scanner, employees);
+                                }
+                                default ->{
+                                    System.out.println("input inválido");
+                                }
+                            }
+
                         }
                         case "2" ->{
+                            System.out.println("CLIENTES:");
                             showListClients(clients);
+
+                            System.out.println("FUNCIONÁRIOS");
+                            showListEmployees(employees);
                         }
                         case "3" ->{
                             Client client = getClientInList(scanner, clients);
-                            Order order = new Order(client, 1);
+                            Order order = new Order(client);
                             while (!order.isStatus()){
                                 userInput = orderOptions(scanner);
                                 //=======[Switch do ORDER]=========
                                 switch (userInput){
-                                    case "1" ->{
+                                    case "1" ->{//ADICIONAR ITEM NO CARRINHO
                                         putProductInCart(scanner, store, order);
                                     }
-                                    case "2" ->{
+                                    case "2" ->{//MOSTRAR CARRINHO
                                         order.showItems();
                                         System.out.println("subtotal: " + order.totalPrice());
                                     }
-                                    case "3" ->{
+                                    case "3" ->{//REMOVER ITEM DO CARRINHO
                                         removeProductFromCart(scanner, order);
                                     }
-                                    case "4" ->{
-                                        order.checkout(store);
+                                    case "4" ->{//Finalizar compra
+                                        System.out.println("selecione o funcionario que lhe auxiliou");
+                                        Employee employee = getEmployeeInList(scanner, employees);
+                                        order.checkout(employee, store);
                                     }
                                     default ->{
                                         System.out.println("input inválido");
@@ -58,10 +79,22 @@ public class Main {
                             }
                         }
                         case "4" ->{
-                            System.out.println("opção usuário 4");
+                            System.out.println("escolha o que deseja editar:");
+                            userInput = getClientOrEmployeeInput(scanner);
+                            switch (userInput){
+                                case "1" ->{
+                                    editClient(scanner, clients);
+                                }
+                                case "2" ->{
+                                    editEmployee(scanner, employees);
+                                }
+                            }
                         }
                         case "5" ->{
-
+                            registerAddress(scanner, clients);
+                        }
+                        case "6" ->{
+                            depositClient(scanner, clients);
                         }
                         default ->{
                             System.out.println("input inválido");
@@ -135,8 +168,167 @@ public class Main {
 
     }
 
+    private static void depositClient(Scanner scanner, List<Client> clients) {
+        Client client = getClientInList(scanner, clients);
+        System.out.println("digite o valor do deposito");
+        double value = scanner.nextDouble();
+        scanner.nextLine();
+        client.setMoney(value);
+    }
 
-//============================[SUPPLIER METHODS]===========================================
+    private static void registerAddress(Scanner scanner, List<Client> clients) {
+        Client client = getClientInList(scanner, clients);
+        System.out.println("Informe o endereço: ");
+        System.out.println("Digite o CEP: ");
+        String CEP = scanner.nextLine();
+
+        System.out.println("Digite a rua: ");
+        String street = scanner.nextLine();
+
+        System.out.println("Digite o número: ");
+        int number = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.println("Digite o complemento: ");
+        String complement = scanner.nextLine();
+
+        System.out.println("Digite o bairro: ");
+        String neighborhood = scanner.nextLine();
+
+        System.out.println("Digite a cidade: ");
+        String city = scanner.nextLine();
+
+        System.out.println("Digite o estado: ");
+        String state = scanner.nextLine();
+
+        System.out.println("Digite o país: ");
+        String country = scanner.nextLine();
+
+        client.setAddress(new Address(CEP, street, number, complement, neighborhood, city, state, country));
+    }
+
+    private static void editEmployee(Scanner scanner, List<Employee> employees) {
+        Employee employee = getEmployeeInList(scanner, employees);
+
+        System.out.println("digite o novo cpf: ");
+        String newCpf = scanner.nextLine();
+
+        System.out.println("digite o novo nome: ");
+        String newName = scanner.nextLine();
+
+        System.out.println("digite o novo email: ");
+        String newEmail = scanner.nextLine();
+
+        System.out.println("digite a nova data de nascimento: ");
+        int newDay = scanner.nextInt();
+        scanner.nextLine();
+
+        int newMonth = scanner.nextInt();
+        scanner.nextLine();
+
+        int newYear = scanner.nextInt();
+        scanner.nextLine();
+
+        employee.setCPF(newCpf);
+        employee.setName(newName);
+        employee.setEmail(newEmail);
+        employee.setBirthDate(newDay, newMonth, newYear);
+    }
+
+    private static void editClient(Scanner scanner, List<Client> clients) {
+        Client client = getClientInList(scanner, clients);
+        System.out.println("digite o novo cpf: ");
+        String newCpf = scanner.nextLine();
+
+        System.out.println("digite o novo nome: ");
+        String newName = scanner.nextLine();
+
+        System.out.println("digite o novo email: ");
+        String newEmail = scanner.nextLine();
+
+        System.out.println("digite o novo telefone: ");
+        String newPhone = scanner.nextLine();
+
+        System.out.println("digite a nova data de nascimento: ");
+        int newDay = scanner.nextInt();
+        scanner.nextLine();
+
+        int newMonth = scanner.nextInt();
+        scanner.nextLine();
+
+        int newYear = scanner.nextInt();
+        scanner.nextLine();
+
+        client.setCPF(newCpf);
+        client.setName(newName);
+        client.setEmail(newEmail);
+        client.setPhone(newPhone);
+        client.setBirthDate(newDay, newMonth, newYear);
+    }
+
+    private static void registerEmployee(Scanner scanner, List<Employee> employees) {
+        System.out.print("Informe o CPF: ");
+        String cpf = scanner.nextLine();
+
+        System.out.print("Informe o nome: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Informe o email: ");
+        String email = scanner.nextLine();
+
+        System.out.print("Informe a data de nascimento: ");
+        System.out.println("dia:");
+        int day = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("mês:");
+        int month = scanner.nextInt();
+        scanner.nextLine();
+        int year = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.print("Informe o valor do salário: ");
+        double salary = scanner.nextDouble();
+        scanner.nextLine();
+
+        Employee employee = new Employee(cpf, name, email, 1);
+        employee.setSalary(salary);
+        employees.add(employee);
+    }
+
+    private static void registerClient(Scanner scanner, List<Client> clients) {
+        System.out.print("Informe o CPF: ");
+        String cpf = scanner.nextLine();
+
+        System.out.print("Informe o nome: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Informe o email: ");
+        String email = scanner.nextLine();
+
+        System.out.println("Informe o telefone: ");
+        String phone = scanner.nextLine();
+
+        System.out.print("Informe a data de nascimento: ");
+        System.out.println("dia:");
+        int day = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("mês:");
+        int month = scanner.nextInt();
+        scanner.nextLine();
+        int year = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.print("Informe o valor do saldo: ");
+        double money = scanner.nextDouble();
+        scanner.nextLine();
+
+        Client client = new Client(cpf, name, email, phone, money, 2);
+        client.setBirthDate(day, month, year);
+        clients.add(client);
+    }
+
+
+    //============================[SUPPLIER METHODS]===========================================
     private static void addNewSupplier(Scanner scanner, List<Supplier> suppliers) {
         System.out.println("digite o CNPJ do fornecedor:");
         String cnpj = scanner.nextLine();
@@ -292,7 +484,7 @@ public class Main {
         store.showStock();
         System.out.println("digite o nome do item que deseja comprar:");
         String productName = scanner.nextLine();
-        System.out.println("informe a quantidade");
+        System.out.println("informe a quantidade:");
         int qtd = scanner.nextInt();
         scanner.nextLine();
         order.getProductInStore(store, productName, qtd);
@@ -318,15 +510,27 @@ public class Main {
         return client;
     }
 
-    public static void initializingClassesForTest(List<Client> clientsList, List<Supplier> suppliersList){
-        Client client1 = new Client("123.547.352-55", "Maria", "mariazinha@gmail.com", 50, 3);
+    public static Employee getEmployeeInList(Scanner scanner, List<Employee> employees){
+        showListEmployees(employees);
+        System.out.println("escolha um cliente");
+        int index = scanner.nextInt();
+        scanner.nextLine();
+        Employee employee = employees.get(index - 1);
+        return employee;
+    }
+
+    public static void initializingClassesForTest(List<Client> clientsList, List<Employee> employees, List<Supplier> suppliersList){
+        Client client1 = new Client("123.547.352-55", "Maria", "mariazinha@gmail.com", "51 91234-5678", 50, 3);
+        Employee employee = new Employee("321.654.879-64", "José", "jose@gmail.com", 1);
 
         Supplier supplier1 = new Supplier("45. 324. 894/0001-69", "Papelaria Genérica","papelaria@gmail.com",50,500);
         Supplier supplier2 = new Supplier("46. 185. 156/0001-61", "Papelaria Menos Genérica","papelariaMG@gmail.com",75,700);
 
         supplier1.addProduct("lápis", "lápis verde da BIC", 2.00, 20);
+        supplier2.addProduct("borracha", "borracha branca", 1.5, 34);
 
         clientsList.add(client1);
+        employees.add(employee);
         suppliersList.add(supplier1);
         suppliersList.add(supplier2);
     }
@@ -343,6 +547,16 @@ public class Main {
         return userInput;
     }
 
+    public static String getClientOrEmployeeInput(Scanner scanner){
+        System.out.println();
+        System.out.println("o que deseja?");
+
+        System.out.println("1. Cliente");
+        System.out.println("2. Funcionário");
+
+        String userInput = scanner.nextLine();
+        return userInput;
+    }
     public static String userOptions(Scanner scanner){
         System.out.println();
         System.out.println("o que deseja fazer?");
@@ -352,6 +566,7 @@ public class Main {
         System.out.println("3. comprar");
         System.out.println("4. editar usuário");
         System.out.println("5. cadastrar endereço");
+        System.out.println("6. depositar");
 
         String userInput = scanner.nextLine();
         return userInput;
@@ -365,6 +580,7 @@ public class Main {
         System.out.println("2. listar itens no carrinho");
         System.out.println("3. deletar itens do carrinho");
         System.out.println("4. pagar");
+        System.out.println("5. sair");
 
         String userInput = scanner.nextLine();
         return userInput;
@@ -404,10 +620,14 @@ public class Main {
             System.out.println("id[" + (i + 1) + "], nome: " + suppliers.get(i).getName());
         }
     }
-
     public static void showListClients(List<Client> clients){
         for (int i = 0; i < clients.size(); i++) {
-            System.out.println("id[" + (i + 1) + "], nome:" + clients.get(i).getName());
+            System.out.println("id[" + (i + 1) + "], nome:" + clients.get(i).getName() + ", saldo: " + clients.get(i).getMoney());
+        }
+    }
+    public static void showListEmployees(List<Employee> employees){
+        for (int i = 0; i < employees.size(); i++) {
+            System.out.println("id[" + (i + 1) + "], nome:" + employees.get(i).getName());
         }
     }
 }

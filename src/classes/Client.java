@@ -18,8 +18,9 @@ public class Client extends User implements Print{
         super();
     }
 
-    public Client(String CPF, String name, String email, double money, int userType) {
+    public Client(String CPF, String name, String email, String phone, double money, int userType) {
         super(CPF, name, email, userType);
+        this.phone = phone;
         this.money = money;
         this.address = new ArrayList<>();
     }
@@ -50,8 +51,8 @@ public class Client extends User implements Print{
         return money;
     }
 
-    public void setMoney(double money) {
-        this.money = money;
+    public void setMoney(double value) {
+        this.money += value;
     }
 
     public void showInfos() {

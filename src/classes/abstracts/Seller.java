@@ -14,7 +14,6 @@ public abstract class Seller implements Print, Dashboard {
     protected String email;
     protected int maxStockPerItem;
     protected int maxStock;
-    protected List<Address> address;
     protected List<Product> products = new ArrayList<>();
 
 
@@ -135,13 +134,5 @@ public abstract class Seller implements Print, Dashboard {
 
     public List<Product> getProducts() {
         return products;
-    }
-
-    public List<Address> getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address.add(address);
     }
 }
