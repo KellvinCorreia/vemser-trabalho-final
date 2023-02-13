@@ -9,17 +9,7 @@ public class Order {
     private Client client;
     private List<Product> products = new ArrayList<>();
 
-
-    private int paymentType;
     private boolean status;
-
-    public int getPaymentType() {
-        return paymentType;
-    }
-
-    public void setPaymentType(int paymentType) {
-        this.paymentType = paymentType;
-    }
 
     public UUID getUuid() {
         return uuid;
@@ -63,9 +53,8 @@ public class Order {
     public Order() {
 
     }
-    public Order(Client client, int paymentType) {
+    public Order(Client client) {
         this.client = client;
-        this.paymentType = paymentType;
     }
 
     public double totalPrice() {
@@ -90,9 +79,10 @@ public class Order {
     }
 
 
-    public boolean checkout(Store store){
+    public boolean checkout(Employee employee, Store store){
         if (client.getMoney() >= totalPrice()){
             client.setMoney(client.getMoney() - totalPrice());
+            employee.setMonthlySales();
             removeStockStore(store);
             products.clear();
             status = true;
@@ -106,6 +96,7 @@ public class Order {
     public void showItems(){
         for (int i = 0; i < products.size(); i++) {
             System.out.printf("id[%d], nome: %s", (i + 1), products.get(i).getName());
+            System.out.println();
         }
     }
 

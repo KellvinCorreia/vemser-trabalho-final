@@ -1,7 +1,9 @@
 package src.classes;
 
+import java.util.UUID;
+
 public class Product {
-    private int id;
+    private UUID id;
     private String name;
     private String description;
     private double price;
@@ -11,7 +13,7 @@ public class Product {
 
     }
     public Product(String name, String description, double price, Supplier supplier) {
-        this.id = id++;
+        this.id = UUID.randomUUID();
         this.name = name;
         this.description = description;
         this.price = price;
@@ -24,6 +26,10 @@ public class Product {
         this.price = price;
     }
 
+    public UUID getId() {
+        return id;
+    }
+
     public String getName() {
         return name;
     }
@@ -34,6 +40,10 @@ public class Product {
 
     public double getPrice() {
         return price;
+    }
+
+    public Supplier getSupplier() {
+        return supplier;
     }
 
     public void setName(String name) {
